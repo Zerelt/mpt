@@ -7,6 +7,8 @@ import Visualizer from './Visualizer';
 import Disc from './Disc'
 import '../style/style.scss';
 
+
+
 class App extends Component {
   constructor(props){
       super(props);
@@ -42,7 +44,7 @@ class App extends Component {
         trackDuration:'0',
         trackCurrentTime:'0',
 
-        volumeValue:'0.2',
+        volumeValue:'0.42',
         progressValue:'0',
 
         chosenCurrentTime:'',
@@ -89,10 +91,10 @@ class App extends Component {
   }
   
   checkKeepPlaying(){
-    let audioRef = ReactDOM.findDOMNode(this.audioContainer);
+    let audioRef = ReactDOM.findDOMNode(this.audioContainer).children[0];
       if (this.state.audioStatus === 'play') {
           this.setState({audioStatus:'play'});
-          audioRef.children[0].play();
+          audioRef.play();
       } else {
         this.setState({audioStatus:'paused'});
       }
@@ -112,8 +114,8 @@ class App extends Component {
                 (this.state.songNr===this.state.musicData.length-1)){
                   this.setState({audioStatus:'stopped'},
                     ()=>{
-                      audioRef.children[0].pause(); 
-                      audioRef.children[0].currentTime=0;
+                      audioRef.pause(); 
+                      audioRef.currentTime=0;
                     }
                   );
                   /*
@@ -123,7 +125,6 @@ class App extends Component {
                     when it reaches the end of the last track
                     and we set currentTime to 0 to remove the 'moveIt_now' class in Disc.js and get the disc back
                   */
-                  // audioRef.children[0].pause(); 
       }
   }
 
@@ -219,7 +220,7 @@ class App extends Component {
     let selectedTime = (this.state.trackDurationRaw*this.state.progressValue)/100;
     let trackMin = (String(selectedTime/60)).split('.')[0];
     let trackSec = (String(selectedTime%60)).split('.')[0];
-    let audioRef = ReactDOM.findDOMNode(this.audioContainer).children[0]
+    let audioRef = ReactDOM.findDOMNode(this.audioContainer).children[0];
     audioRef.currentTime = e.target.value;
     this.setState({
       chosenCurrentTime: e.target.value,

@@ -12,7 +12,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname,'dist'),
     filename: '[name].js',
-    publicPath:'./'
+    // publicPath:'./'
   },
 
   devtool:'cheap-source-map',
@@ -25,7 +25,7 @@ module.exports = {
         use: ExtractTextPlugin.extract({
           fallback:'style-loader',
           use:['css-loader','postcss-loader','sass-loader'],
-          publicPath:'./'
+          publicPath:'/dist/'
         })
       },
       {
@@ -37,23 +37,16 @@ module.exports = {
         test:/\.(jpe?g|png|svg|gif)$/i,
         exclude:/node_modules/,
         use:[
-          // 'file-loader?name=[name].[ext]&outputPath=images/&publicPath=images/',
-          // 'file-loader?name=[name].[ext]&outputPath=images/&publicPath=../',
-          // 'file-loader?name=images/[name].[ext]&publicPath=/',
           'file-loader?name=images/[name].[ext]&publicPath=./',
           'image-webpack-loader'
         ]
       },
       {
         test: /\.(ttf|woff|eot)$/,
-        // use: 'file-loader?name=fonts/[name].[ext]&publicPath=../'
-        // use: 'file-loader?name=fonts/[name].[ext]&publicPath=../'
-        // use: 'file-loader?name=fonts/[name].[ext]&publicPath=/'
         use: 'file-loader?name=fonts/[name].[ext]&publicPath=./'
       },
       {
         test: /\.(mp3|mp4)$/,
-        // use: 'file-loader?name=audio/[name].[ext]&publicPath=/'
         use: 'file-loader?name=audio/[name].[ext]&publicPath=./'
       }
     ]
